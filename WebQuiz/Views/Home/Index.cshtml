@@ -1,0 +1,44 @@
+﻿@model WebQuiz.Models.QuizViewModel
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+@Html.HiddenFor(model => model.questionNumber)
+@Html.HiddenFor(model => model.questionText)
+@Html.HiddenFor(model => model.answers)
+
+<h1>Welcome</h1>
+
+<form asp-action="LoadNextQuestion" formmethod="post">
+    @* Welcome Container *@
+    <div id="welcomeContainer">
+        <br />
+        This simple quiz tests your ability using C# ASP.NET Core.
+        <br />
+        <br />
+        Enter your name and press Submit.
+        <br />
+        <br />
+        <label>Name:</label>
+        <input type="text" name="userName" autofocus placeholder="Type your name..." />
+        <button id="welcomeSubmit" type="button">Submit</button>
+    </div>
+    @* Information Page Container *@
+    <div id="infoContainer" style="display:none;">
+        <br />
+        This quiz consists of 10 multiple choice questions each of which you have 30 seconds to answer.
+        <br />
+        <br />
+        The quiz must be completed in one sitting as your answers cannot be saved until the quiz has ended.
+        <br />
+        <br />
+        Good luck!
+        <br />
+        <br />
+        <input type="submit" class="bnt btn-primary" value="Begin Quiz" />
+    </div>
+</form>
+
+@section Scripts {
+    <script type="text/javascript" src="~/WelcomeContainerManagement.js"></script>
+}

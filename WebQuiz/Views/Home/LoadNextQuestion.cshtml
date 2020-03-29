@@ -1,0 +1,66 @@
+﻿@model WebQuiz.Models.QuizViewModel
+@{
+    ViewData["Title"] = "Questions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    TempData["UserName"] = Model.userName;
+    int score = (int)TempData["score"];
+}
+<h2>Questions</h2>
+<div>
+    @* Questions Container *@
+    <div id="questionContainer">
+        <br />
+        <h3>Question @Model.questionNumber of @Model.totalQuestions</h3>
+        <br />
+        <br />
+        <p>
+            <b>@Model.questionText</b>
+        </p>
+        <br />
+        <br />
+        @* On click of each button setup a Url.Action() method which executes UpdateScore() method to determine whether the answer is correct or not and update the score accordingly *@
+        <button id="answerOne" class="btn btn-default" name="correct" onclick="@Url.Action("UpdateScore", "Home", new { @name = "correct", score = score})">@Model.answers[0]</button>
+        <button id="answerTwo" class="btn btn-default" name="incorrect">@Model.answers[1]</button>
+        <button id="answerThree" class="btn btn-default" name="incorrect">@Model.answers[2]</button>
+        <button id="answerFour" class="btn btn-default" name="incorrect">@Model.answers[3]</button>
+        <br />
+        <br />
+        <label id="successLabel" style="color:green;display:none;">Well done!</label>
+        <label id="failLabel" style="color:red;display:none;">Incorrect!</label>
+        <br />
+        <br />
+        <form asp-action="LoadNextQuestion" asp-route-questionNumber="@Model.questionNumber" asp-route-score="@score" formmethod="post">
+            <input type="submit" class="btn btn-primary" value="Next Question" />
+        </form>
+    </div>
+</div>
+
+@switch (Model.questionNumber)
+{
+    case 1:
+        @section Scripts
+            {
+            <script type="text/javascript" src="~/QuestionOneContainerManagement.js"></script>
+        }
+        break;
+    case 2:
+        @section Scripts
+            {
+            <script type="text/javascript" src="~/QuestionTwoContainerManagement.js"></script>
+        }
+        break;
+    case 3:
+        @section Scripts
+            {
+            <script type="text/javascript" src="~/QuestionThreeContainerManagement.js"></script>
+        }
+        break;
+    case 4:
+        @section Scripts
+            {
+            <script type="text/javascript" src="~/QuestionFourContainerManagement.js"></script>
+        }
+        break;
+    default:
+        break;
+}
