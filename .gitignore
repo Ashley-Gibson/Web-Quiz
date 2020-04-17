@@ -1,3 +1,5 @@
 .vs/
 WebQuiz/bin/
 WebQuiz/obj/
+WebQuiz/appsettings.json
+WebQuiz/appsettings.Development.json
